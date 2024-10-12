@@ -1,0 +1,56 @@
+﻿@model UserVM
+
+<body>
+    <div class="container-fluid mt-4 profile">
+        <h1 class="title text-start">PROFILE</h1>
+        <div class="row justify-content-center">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                @Html.Partial("Sidebar", Model)
+            </div>
+            <!-- Course History Section -->
+            <div class="col-md-9">
+                <div class="course-history">
+                    <h2 class="text-center custom-header mb-4">Course History</h2>
+                    <div class="table-responsive">
+                        <table class="custom-table table-hover">
+                            <thead class="custom-table-header">
+                                <tr>
+                                    <th scope="col">Tên</th>
+                                    <th scope="col">Ngày Đăng Ký</th>
+                                    <th scope="col">Trạng Thái</th>
+                                    <th scope="col">Điểm</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Enrollments != null && Model.Enrollments.Any())
+                                {
+                                    @foreach (var enrollment in Model.Enrollments)
+                                    {
+                                        <tr class="custom-row-bg">
+                                            <td class="table-name">@enrollment.Course.Title</td>
+                                            <td>@enrollment.EnrollmentDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@enrollment.Status</td>
+                                            <td><span class="custom-badge">@enrollment.Course.Price</span></td>
+                                            <th scope="col">
+                                                <i class="fa fa-arrow-right"></i>
+                                            </th>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center">Không có dữ liệu khóa học.</td>
+                                    </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
